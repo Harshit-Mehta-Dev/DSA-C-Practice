@@ -70,12 +70,17 @@ An **Algorithm** is a step-by-step procedure for solving a problem or performing
 
 ---
 
-## 🎮 DSA Learning Games & Visualizers
-Boost your learning experience by playing these interactive coding games and visualizers! 
-- [**VisuAlgo**](https://visualgo.net/): Visualizing data structures and algorithms through animation.
-- [**Algorithm Visualizer**](https://algorithm-visualizer.org/): An interactive online platform that visualizes algorithms from code.
-- [**CodeCombat**](https://codecombat.com/): Learn how to code by playing a game (supports C++).
-- [**Codewars**](https://www.codewars.com/): Improve your skills by training with others on real code challenges.
+## 🎮 Custom DSA Sorting Simulation Game
+To help you truly understand how sorting algorithms work, we've built a **Custom Web-Based Simulator** right here in this repository!
+
+### How to Play:
+1. Open the `simulation_game` folder in your file explorer.
+2. Double-click on `index.html` to open it in any web browser.
+3. Click **"Generate New Array"** to create a random dataset.
+4. Select an algorithm (like **Bubble Sort** or **Merge Sort**) and watch the bars swap and merge in real-time!
+5. Use the speed slider to slow down the animation so you can see exactly how the algorithm behaves at each step.
+
+*Visualizing data structures is the best way to master them!*
 
 ---
 
