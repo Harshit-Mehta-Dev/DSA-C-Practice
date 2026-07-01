@@ -77,7 +77,7 @@ To help you truly understand how sorting algorithms work, we've built a **Custom
 1. Open the `simulation_game` folder in your file explorer.
 2. Double-click on `index.html` to open it in any web browser.
 3. Click **"Generate New Array"** to create a random dataset.
-4. Select an algorithm (like **Bubble Sort** or **Merge Sort**) and watch the bars swap and merge in real-time!
+4. Select an algorithm (like **Bubble Sort**, **Merge Sort**, **Quick Sort**, etc.) and watch the bars swap and merge in real-time!
 5. Use the speed slider to slow down the animation so you can see exactly how the algorithm behaves at each step.
 
 *Visualizing data structures is the best way to master them!*
