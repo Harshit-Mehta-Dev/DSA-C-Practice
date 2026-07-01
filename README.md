@@ -70,6 +70,38 @@ An **Algorithm** is a step-by-step procedure for solving a problem or performing
 
 ---
 
+## 🎮 DSA Learning Games & Visualizers
+Boost your learning experience by playing these interactive coding games and visualizers! 
+- [**VisuAlgo**](https://visualgo.net/): Visualizing data structures and algorithms through animation.
+- [**Algorithm Visualizer**](https://algorithm-visualizer.org/): An interactive online platform that visualizes algorithms from code.
+- [**CodeCombat**](https://codecombat.com/): Learn how to code by playing a game (supports C++).
+- [**Codewars**](https://www.codewars.com/): Improve your skills by training with others on real code challenges.
+
+---
+
+## 🧠 Interactive DSA Mini-Quiz
+Test your knowledge right here! Click on the questions below to reveal the answers.
+
+<details>
+<summary><b>❓ What is the time complexity of finding an element in a Hash Table?</b></summary>
+<br>
+<blockquote><b>Answer:</b> <code>O(1)</code> average case, because it uses a hash function to compute the exact index of the data!</blockquote>
+</details>
+
+<details>
+<summary><b>❓ Which sorting algorithm uses a 'Pivot'?</b></summary>
+<br>
+<blockquote><b>Answer:</b> <b>Quick Sort</b>. It picks a pivot element and partitions the array into two sub-arrays according to whether they are less than or greater than the pivot.</blockquote>
+</details>
+
+<details>
+<summary><b>❓ What data structure operates on a Last-In, First-Out (LIFO) principle?</b></summary>
+<br>
+<blockquote><b>Answer:</b> A <b>Stack</b>! Think of it like a stack of plates; you can only take the top plate off first.</blockquote>
+</details>
+
+---
+
 ## 📂 Repository Organization Strategy
 This repository strictly follows an isolated branching strategy to keep learning modules completely independent:
 * `linear-only`: Contains solely the code for Linear and Binary searches.
