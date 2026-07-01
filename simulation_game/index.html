@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Sorting Simulator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1><span class="highlight">DSA</span> Sorting Visualizer</h1>
+            <p>An interactive simulation to master sorting algorithms</p>
+            
+            <div class="controls">
+                <button id="generate-btn" class="btn secondary">Generate New Array</button>
+                <div class="slider-group">
+                    <label for="speed">Animation Speed:</label>
+                    <input type="range" id="speed" min="10" max="300" value="100">
+                </div>
+                <div class="algorithm-select">
+                    <button id="bubble-btn" class="btn primary">Bubble Sort</button>
+                    <button id="merge-btn" class="btn primary">Merge Sort</button>
+                    <button id="quick-btn" class="btn primary">Quick Sort</button>
+                    <button id="insertion-btn" class="btn primary">Insertion Sort</button>
+                    <button id="selection-btn" class="btn primary">Selection Sort</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="visualizer-container">
+            <div id="bars-container"></div>
+        </main>
+        
+        <footer>
+            <p>Currently visualizing: <strong id="status-text">Waiting to start...</strong></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
