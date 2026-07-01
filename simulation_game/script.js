@@ -14,11 +14,37 @@ let delayTime = 100;
 
 speedControl.addEventListener("input", (e) => {
     delayTime = 310 - parseInt(e.target.value);
+    setTransitionSpeed(delayTime);
 });
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+function setTransitionSpeed(ms) {
+    const seconds = ms / 1000;
+    bars.forEach(b => {
+        b.element.style.transition = `transform ${seconds}s ease, background-color ${seconds}s ease, height ${seconds}s ease`;
+    });
+}
+
+function updatePositions() {
+    const barWidth = 30;
+    const gap = 2;
+    const totalWidth = bars.length * barWidth + (bars.length - 1) * gap;
+    // Calculate how far from the left we need to be to center everything
+    const offset = (container.clientWidth - totalWidth) / 2;
+    
+    for (let i = 0; i < bars.length; i++) {
+        const xPos = offset + i * (barWidth + gap);
+        bars[i].element.style.transform = `translateX(${xPos}px)`;
+    }
+}
+
+// Recalculate on window resize
+window.addEventListener("resize", () => {
+    if (bars.length > 0) updatePositions();
+});
 
 function generateArray(size = 20) {
     if (isSorting) return;
@@ -35,6 +61,10 @@ function generateArray(size = 20) {
         container.appendChild(bar);
         bars.push({ element: bar, value: value });
     }
+    
+    setTransitionSpeed(delayTime);
+    updatePositions();
+    
     statusText.innerText = "New Array Generated";
     statusText.style.color = "var(--bar-default)";
 }
@@ -49,17 +79,12 @@ function toggleUI(disabled) {
     selectionBtn.disabled = disabled;
 }
 
+// Swaps the objects in the array and animates their physical positions
 function swapBars(i, j) {
-    let tempHeight = bars[i].element.style.height;
-    bars[i].element.style.height = bars[j].element.style.height;
-    bars[j].element.style.height = tempHeight;
-    
-    let tempVal = bars[i].value;
-    bars[i].value = bars[j].value;
-    bars[j].value = tempVal;
-    
-    bars[i].element.innerText = bars[i].value;
-    bars[j].element.innerText = bars[j].value;
+    let temp = bars[i];
+    bars[i] = bars[j];
+    bars[j] = temp;
+    updatePositions();
 }
 
 // --- Bubble Sort ---
@@ -78,6 +103,7 @@ async function bubbleSort() {
             
             if (bars[j].value > bars[j+1].value) {
                 swapBars(j, j+1);
+                await sleep(delayTime); // Wait for translation animation
             }
             
             bars[j].element.style.backgroundColor = "var(--bar-default)";
@@ -120,6 +146,7 @@ async function selectionSort() {
         
         if (min_idx !== i) {
             swapBars(i, min_idx);
+            await sleep(delayTime);
         }
         
         bars[min_idx].element.style.backgroundColor = "var(--bar-default)";
@@ -152,6 +179,7 @@ async function insertionSort() {
             await sleep(delayTime);
             
             swapBars(j, j - 1);
+            await sleep(delayTime);
             
             bars[j].element.style.backgroundColor = "var(--bar-sorted)";
             bars[j-1].element.style.backgroundColor = "var(--bar-compare)";
@@ -204,6 +232,7 @@ async function partition(low, high) {
         if (bars[j].value < pivot) {
             i++;
             swapBars(i, j);
+            await sleep(delayTime);
             bars[i].element.style.backgroundColor = "orange";
         } else {
             bars[j].element.style.backgroundColor = "var(--bar-default)";
@@ -212,6 +241,8 @@ async function partition(low, high) {
     
     await sleep(delayTime);
     swapBars(i + 1, high);
+    await sleep(delayTime);
+    
     bars[high].element.style.backgroundColor = "var(--bar-default)";
     bars[i + 1].element.style.backgroundColor = "var(--bar-sorted)";
     
@@ -259,12 +290,12 @@ async function merge(l, m, r) {
     for (let i = 0; i < n1; i++) {
         await sleep(delayTime / 2);
         bars[l + i].element.style.backgroundColor = "var(--primary)";
-        L[i] = bars[l + i].value;
+        L[i] = bars[l + i];
     }
     for (let j = 0; j < n2; j++) {
         await sleep(delayTime / 2);
         bars[m + 1 + j].element.style.backgroundColor = "var(--bar-compare)";
-        R[j] = bars[m + 1 + j].value;
+        R[j] = bars[m + 1 + j];
     }
     
     await sleep(delayTime);
@@ -272,44 +303,39 @@ async function merge(l, m, r) {
     let i = 0, j = 0, k = l;
     
     while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) {
-            bars[k].value = L[i];
-            bars[k].element.style.height = `${L[i]}%`;
-            bars[k].element.innerText = L[i];
+        if (L[i].value <= R[j].value) {
+            bars[k] = L[i];
             i++;
         } else {
-            bars[k].value = R[j];
-            bars[k].element.style.height = `${R[j]}%`;
-            bars[k].element.innerText = R[j];
+            bars[k] = R[j];
             j++;
         }
         bars[k].element.style.backgroundColor = "var(--bar-sorted)";
+        updatePositions();
         k++;
         await sleep(delayTime);
     }
     
     while (i < n1) {
-        bars[k].value = L[i];
-        bars[k].element.style.height = `${L[i]}%`;
-        bars[k].element.innerText = L[i];
+        bars[k] = L[i];
         bars[k].element.style.backgroundColor = "var(--bar-sorted)";
+        updatePositions();
         i++;
         k++;
         await sleep(delayTime);
     }
     
     while (j < n2) {
-        bars[k].value = R[j];
-        bars[k].element.style.height = `${R[j]}%`;
-        bars[k].element.innerText = R[j];
+        bars[k] = R[j];
         bars[k].element.style.backgroundColor = "var(--bar-sorted)";
+        updatePositions();
         j++;
         k++;
         await sleep(delayTime);
     }
     
-    for(let i = l; i <= r; i++) {
-        bars[i].element.style.backgroundColor = "var(--bar-default)";
+    for(let idx = l; idx <= r; idx++) {
+        bars[idx].element.style.backgroundColor = "var(--bar-default)";
     }
 }
 
