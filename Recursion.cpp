@@ -95,7 +95,7 @@ int main(){
 }*/
 
 //check if array is sorted  or not using recursion:-
-#include<iostream>
+/*#include<iostream>
 using namespace std;
 bool isSorted(int arr[], int n){
     if(n==1){ // base case
@@ -110,4 +110,4 @@ int main() {
     int arr[] = {1,2,3,4,5};
     cout<<isSorted(arr,5);
     return 0;
-}
+}*/
